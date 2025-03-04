@@ -21,3 +21,10 @@ use App\Http\Controllers\AuthController;
 
 
 Route::post('auth/login', [AuthController::class, 'login'])->name('api.login');
+Route::post('auth/register', [AuthController::class, 'register'])->name('api.register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('auth/me', [AuthController::class, 'me'])->name('api.auth.me');
+    Route::get('auth/logout', [AuthController::class, 'logout'])->name('api.auth.logout');
+
+});
